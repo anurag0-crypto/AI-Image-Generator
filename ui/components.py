@@ -25,8 +25,5 @@ def header():
 
     st.title("🎨 AI Image Generator")
 
-    st.caption(
-        "Generate AI artwork"
-    )
 
-    st.divider()
+
