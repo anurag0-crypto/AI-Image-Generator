@@ -33,14 +33,14 @@ if "history" not in st.session_state:
 if "gallery" not in st.session_state:
     st.session_state.gallery = []
 
-if "favorites" not in st.session_state:
-    st.session_state.favorites = []
-
 if "prompt" not in st.session_state:
     st.session_state.prompt = ""
 
 if "last_prompt" not in st.session_state:
     st.session_state.last_prompt = ""
+
+if "favorites" not in st.session_state:
+    st.session_state.favorites = []
 
 
 
@@ -151,15 +151,41 @@ with st.sidebar:
 
 prompt = st.text_area(
     "Describe your image",
-    value=st.session_state.prompt,
+    key="prompt",
     height=150,
     placeholder=
     "Example: A futuristic Indian city at night..."
 )
 
-st.caption(
-    f"Characters: {len(prompt)}"
-)
+col1, col2 = st.columns([1, 5])
+
+with col1:
+
+    if st.button("⭐ Save"):
+
+        if prompt.strip():
+
+            if prompt not in st.session_state.favorites:
+
+                st.session_state.favorites.append(
+                    prompt
+                )
+
+                st.success(
+                    "Added to favorites!"
+                )
+
+            else:
+
+                st.info(
+                    "Already in favorites."
+                )
+
+with col2:
+
+    st.caption(
+        f"Characters: {len(prompt)}"
+    )
 
 # ----------------------------------
 # PROMPT IDEAS
@@ -341,22 +367,45 @@ if generate:
 
 st.divider()
 
-st.subheader(
-    "⭐ Favorite Prompts"
-)
+st.subheader("⭐ Favorite Prompts")
 
 if st.session_state.favorites:
 
-    for fav in st.session_state.favorites:
+    for idx, fav in enumerate(
+        st.session_state.favorites
+    ):
 
-        st.write("•", fav)
+        col1, col2 = st.columns([8, 1])
+
+        with col1:
+
+            if st.button(
+                fav,
+                key=f"use_fav_{idx}"
+            ):
+
+                st.session_state.prompt = fav
+
+                st.rerun()
+
+        with col2:
+
+            if st.button(
+                "❌",
+                key=f"remove_fav_{idx}"
+            ):
+
+                st.session_state.favorites.pop(
+                    idx
+                )
+
+                st.rerun()
 
 else:
 
     st.info(
         "No favorite prompts yet."
     )
-
 # ----------------------------------
 # HISTORY
 # ----------------------------------
