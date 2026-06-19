@@ -1,81 +1,189 @@
-# AI Image Generator Chatbot
+# AI Image Generator
+
+A Streamlit-based AI Image Generator that converts text prompts into AI-generated images. Users can enter a prompt, choose an artistic style, apply prompt enhancements, use negative prompts, generate multiple images, save favorite prompts, browse image history, and download generated images.
+
+---
 
 ## Features
 
-- Streamlit Frontend
-- Hugging Face FLUX.1-schnell
-- Style Conditioned Prompts
-- Prompt History
-- Gallery View
-- Download Image
-- Multiple Image Generation
-- Negative Prompt
-- Random Prompt Generator
-- Favorite Prompts
-- Regenerate Last Image
-- Dark/Light Mode
-- Save Images Locally
-- Progress Bar
-- Error Handling
+
+* Streamlit frontend
+* Text prompt input
+* Style selection using radio buttons
+* AI image generation using Hugging Face FLUX.1-schnell
+* Generated image display
+* Prompt history
+* Environment variable based API key management
+* Clean modular project structure
+* Favorite prompts
+* Prompt history
+* Gallery view
+* Download generated images
+* Random prompt generator
+* Regenerate last image
+* Negative prompt support
+* Auto prompt enhancement
+* Multiple image generation
+* Generation statistics
+* Automatic local image saving
+
+---
+
+## Technologies Used
+
+* Python
+* Streamlit
+* Pillow (PIL)
+* Requests
+* Hugging Face Inference API
+* FLUX.1-schnell Image Generation Model
 
 ---
 
 ## Installation
 
-```bash
-git clone <repo-link>
+### 1. Clone the repository
 
-cd image-generator-chatbot
+```bash
+git clone https://github.com/anurag0-crypto/AI-Image-Generator.git
+cd <project_folder>
 ```
 
-Install dependencies:
+### 2. Create a virtual environment
+
+```bash
+python -m venv venv
+```
+
+Activate it:
+
+**Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+**Linux / Mac**
+
+```bash
+source venv/bin/activate
+```
+
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Create `.env`
+---
+
+## Add Your API Key
+
+Create a `.env` file in the project root:
 
 ```env
-HF_TOKEN=your_token_here
+HF_TOKEN=API_TOKEN
 ```
 
-Run:
+```gitignore
+.env
+```
+
+---
+
+## Running the Application
 
 ```bash
 streamlit run app.py
 ```
 
+The application will open automatically in your browser.
+
 ---
 
-## Deployment
+## How It Works
 
-Deploy using:
+1. Enter an image prompt.
+2. Select an image style.
+3. Optionally add:
 
-- Streamlit Community Cloud
+   * Negative prompts
+   * Prompt enhancement
+   * Multiple image generation
+4. Click **Generate Image**.
+5. View, download, and save generated images.
 
-Add:
+---
+
+## Supported Styles
+
+* Realistic
+* Anime
+* Cyberpunk
+* Fantasy
+* Watercolor
+* Digital Art
+* Pixel Art
+* Cinematic
+
+Each style automatically appends style-specific instructions to improve image quality and consistency.
+
+---
+
+## Example
+
+### User Prompt
 
 ```text
-HF_TOKEN = your_token
+A futuristic Indian city at night
 ```
 
-inside Streamlit Secrets.
+### Selected Style
+
+```text
+Cyberpunk
+```
+
+### Final Prompt Sent to Model
+
+```text
+A futuristic Indian city at night, cyberpunk aesthetic, neon lights, futuristic cityscape
+```
 
 ---
 
 ## Known Limitation
 
-Free Hugging Face inference endpoints can sometimes be slow or rate limited.
+The FLUX.1-schnell inference endpoint does not provide full native negative prompt control through the simple API route used in this project. Negative prompts are appended as textual instructions and their effectiveness may vary depending on the generated image.
 
 ---
 
-## Screenshot
+## Future Improvements
 
-Add a screenshot named:
+* User authentication
+* Image upscaling
+* Image editing and inpainting
+* Prompt templates
+* Cloud image storage
+* Image sharing links
+* Advanced generation controls
 
-```text
-screenshot.png
-```
+---
 
-to the root folder.
+## Deployment
+
+### Streamlit Community Cloud
+
+1. Push the project to GitHub.
+2. Open Streamlit Community Cloud.
+3. Connect your GitHub repository.
+4. Add the Hugging Face token under Secrets.
+5. Deploy the application.
+
+---
+
+## Author
+
+Anurag Kar
+
+Built using Streamlit and Generative AI.
